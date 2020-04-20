@@ -6,6 +6,8 @@ import { ITodo } from '../interfaces/itodo';
 })
 export class TodoService {
 
+  todoTitle: '';
+
   todoList: Array<ITodo> = [
     { id: 1, title: 'Install Angular CLI', description: 'Just Do It' },
   ];
@@ -19,14 +21,17 @@ export class TodoService {
 
   addTodo(todo: ITodo): void {
     this.todoList.push({
-      id: this.todoId++,
+      id: ++this.todoId,
       title: todo.title,
-      description: todo.description
+      description: ''
     });
+
+    this.todoTitle = '';
 
   }
 
   deleteTodo(todo: ITodo) {
-    this.todoList.splice(todo.id, 1);
+    const index = this.todoList.findIndex(todoItem => todoItem === todo);
+    this.todoList.splice(index, 1);
   }
 }

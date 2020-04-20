@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TodoService } from '../services/todo.service';
 
 @Component({
   selector: 'app-create-todo',
@@ -7,9 +8,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CreateTodoComponent implements OnInit {
 
-  constructor() { }
+  todoTitle = '';
+
+  constructor(private todoService: TodoService) { }
 
   ngOnInit() {
   }
+
+  addTodo(): void {
+    this.todoService.addTodo({
+      title: this.todoTitle,
+      description: ''
+    });
+    // resets our todoTitle variable to an empty string
+    this.todoTitle = '';
+  }
+
 
 }
